@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">账房先生</string>
+    <string name="text_leftMoney">净资产</string>
+    <string name="_0">￥0</string>
+    <string name="text_moth">本月</string>
+    <string name="text_today">今天</string>
+    <string name="text_mark">记一笔</string>
+    <string name="tex_payment">支出</string>
+    <string name="text_save">保存</string>
+    <string name="_0_0">今日已用￥0，还可用￥0</string>
+    <string name="text_0_0">本月已用￥0，还可用￥0</string>
+    <string name="text_0">￥0</string>
+</resources>
