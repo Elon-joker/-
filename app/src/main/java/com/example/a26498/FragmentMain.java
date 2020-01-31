@@ -15,6 +15,7 @@ public class FragmentMain extends Fragment {
     private TextView textMothMoneyHope;
     private TextView textShowDayMassage;
     private TextView textShowMothMassage;
+    private TextView textShowMoneyHave;
 
     private ProgressBar proBarDay,proBarMoth;
 
@@ -30,7 +31,7 @@ public class FragmentMain extends Fragment {
     private void bindView(View view){
         textShowDayMassage=view.findViewById(R.id.textShowDayMassage);
         textShowMothMassage=view.findViewById(R.id.textShowMothMassage);
-        //有问题
+        textShowMoneyHave=view.findViewById(R.id.textShowMoney);
         textDayMoneyHope=view.findViewById(R.id.textDayHP);
         textMothMoneyHope=view.findViewById(R.id.textMothHP);
 
@@ -88,7 +89,15 @@ public class FragmentMain extends Fragment {
         this.proBarMoth = proBarMoth;
     }
 
-   /*一般方法*/
+    public TextView getTextShowMoneyHave() {
+        return textShowMoneyHave;
+    }
+
+    public void setTextShowMoneyHave(TextView textShowMoneyHave) {
+        this.textShowMoneyHave = textShowMoneyHave;
+    }
+
+    /*一般方法*/
     public void setPro(int moneyOutDay,int moneyOutMoth,int allDayMoney,int allMothMoney){
         if(allDayMoney!=0&&allMothMoney!=0){
             proBarDay.setProgress(moneyOutDay*100/allDayMoney);
