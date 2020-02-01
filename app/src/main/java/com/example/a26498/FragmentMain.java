@@ -104,4 +104,6 @@ public class FragmentMain extends Fragment {
             proBarMoth.setProgress(moneyOutMoth*100/allMothMoney);
         }
     }
+
+
 }

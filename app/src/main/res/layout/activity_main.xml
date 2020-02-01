@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="71dp"
         android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,31 +24,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+            android:background="@drawable/text_main_ic"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/textShow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+            android:background="@drawable/text_show_ic"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/textUser"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+            android:background="@drawable/text_person_ic"
+            android:gravity="center" />
 
     </LinearLayout>
 
     <View
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
