@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FragmentUser fragmentUser = new FragmentUser();
 
     private FrameLayout ly_content;
-   private FragmentManager fragmentManager=getSupportFragmentManager();
-   private FragmentTransaction transaction = fragmentManager.beginTransaction();
+
     private TextView textMain;
     private TextView textShow;
     private TextView textUser;
@@ -33,14 +32,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println("555555555");
         bindView();
         onClick(textMain);
         }
 
     @Override
     public void onClick(View v) {
-
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         if(flage){//保证添加一次，到位展示
             transaction.add(R.id.fragmentContainer,fragmentMain);
             transaction.add(R.id.fragmentContainer,fragmentShow);
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textMain.setSelected(true);
                     transaction.show(fragmentMain);
-                System.out.println("44444444444444444444");
                 break;
             case R.id.textShow:
                 setUnSelected();
