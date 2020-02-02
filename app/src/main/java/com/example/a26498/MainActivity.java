@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int moneyOutDay=0,moneyOutMoth=0;
     private boolean flage=true;
 
-  //  private SharedPreferences sharedPreData=this.getSharedPreferences("data",MODE_PRIVATE);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textMain.setSelected(true);
                     transaction.show(fragmentMain);
+                    System.out.println("123456");
                 break;
             case R.id.textShow:
                 setUnSelected();
@@ -63,27 +64,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textUser.setSelected(true);
                 transaction.show(fragmentUser);
-//                fragmentUser.getTextAbout().setOnClickListener(new View.OnClickListener(){
-//                    @Override
-//                    public void onClick(View view){
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                        //builder.setIcon(R.drawable.ic_launcher);
-//                        String aboutM="向晚工作室出品\n 美工监制 汪婉婉\t\t技术监制  占建\n意见反馈及联系QQ：2649853081";
-//                        String about="关于我们";
-//                        builder.setTitle(about);
-//                        builder.setMessage(aboutM);
-//                        builder.show();
-//                    }
-//
-//                });
-//                fragmentUser.getTextAddMoney().setOnClickListener(new View.OnClickListener(){
-//                    @Override
-//                    public void onClick(View view){
-//                          Intent intent=new Intent(MainActivity.this,AddMoneyActivity.class);
-//                          startActivityForResult(intent,2);
-//                    }
-//
-//                });
+                    fragmentUser.getTextAbout().setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            //builder.setIcon(R.drawable.ic_launcher);
+                            String aboutM="向晚工作室出品\n 美工监制 汪婉婉\t\t技术监制  占建\n意见反馈及联系QQ：2649853081";
+                            String about="关于我们";
+                            builder.setTitle(about);
+                            builder.setMessage(aboutM);
+                            builder.show();
+                        }
+                    });
+                    fragmentUser.getTextAddMoney().setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view){
+                            Intent intent=new Intent(MainActivity.this,AddMoneyActivity.class);
+                            startActivityForResult(intent,2);
+                        }
+
+                    });
                 break;
         }
         transaction.commit();
@@ -136,26 +136,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  fragmentMain.getTextDayMoneyHope().setText(String.valueOf(userClass.getMoneyTotalDay()));
              }
               break;
-//           case 2:
-//               if(resultCode==RESULT_OK){
-//                  int[] money;
-//                  money=data.getIntArrayExtra("money");
-//                  userClass.setMoneyTotalDay(money[0]);
-//                  userClass.setMoneyTotalMoth(money[1]);
-//                   userClass.setMoneyHave(money[2]);
-//               }
-//               break;
+
+           case 2:
+               if(resultCode==RESULT_OK){
+                   int[] money=new int[3];
+                   money=data.getIntArrayExtra("money");
+                   userClass.setMoneyTotalDay(money[0]);
+                   userClass.setMoneyTotalMoth(money[1]);
+                   userClass.setMoneyHave(money[2]);
+                   for(int i=0;i<3;i++){
+                       System.out.println(money[i]);
+               }
+
+           }
+               break;
            default:
        }
     }
 
-//    public UserClass dataSave(int moneyHave,int moneyDayOut,int moneyMothOut){
-//        SharedPreferences.Editor editData=sharedPreData.edit();
-//        editData.putInt("moneyHave",moneyHave);
-//        editData.putInt("moneyDayOut",moneyDayOut);
-//        editData.putInt("moneyMothOut",moneyMothOut);
-//        editData.apply();//调用 apply()方法将添加的数据提交
-//        return new UserClass(sharedPreData.getInt("moneyDayOut",30),sharedPreData.getInt("moneyMothOut",900),sharedPreData.getInt("moneyHave",1500));
-//    }
 
 }

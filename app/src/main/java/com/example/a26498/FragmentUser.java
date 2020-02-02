@@ -12,12 +12,21 @@ import android.widget.TextView;
 public class FragmentUser extends Fragment {
     private TextView  textAbout;
     private TextView  textAddMoney;
+    static View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user,container,false);
-
-        bindView(view);
+        if(null!=view)
+        {
+            ViewGroup parent=(ViewGroup)view.getParent();
+            if(null!=parent){
+                parent.removeView(view);
+            }
+        }
+        else{
+            view = inflater.inflate(R.layout.fragment_user,container,false);
+            bindView(view);
+        }
         return view;
     }
 

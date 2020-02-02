@@ -16,14 +16,24 @@ public class FragmentMain extends Fragment {
     private TextView textShowDayMassage;
     private TextView textShowMothMassage;
     private TextView textShowMoneyHave;
-
+    static View view;
     private ProgressBar proBarDay,proBarMoth;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main,container,false);
+        if(null!=view)
+        {
+            ViewGroup parent=(ViewGroup)view.getParent();
+            if(null!=parent){
+                parent.removeView(view);
+            }
+        }
+        else{
+        view = inflater.inflate(R.layout.fragment_main,container,false);
         bindView(view);
+        }
         return view;
     }
 
