@@ -68,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257" />
+        app:layout_constraintVertical_bias="0.272" />
 
     <TextView
         android:id="@+id/textView5"
@@ -107,7 +107,7 @@
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textShowMoney"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/proBarMoth"
@@ -149,8 +149,8 @@
 
     <TextView
         android:id="@+id/textShowDayMassage"
-        android:layout_width="189dp"
-        android:layout_height="23dp"
+        android:layout_width="246dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -160,15 +160,15 @@
         android:text="@string/_0_0"
         app:layout_constraintBottom_toTopOf="@+id/proBarMoth"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/proBarToday"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textShowMothMassage"
-        android:layout_width="208dp"
-        android:layout_height="19dp"
+        android:layout_width="260dp"
+        android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -179,7 +179,7 @@
         android:text="@string/text_0_0"
         app:layout_constraintBottom_toBottomOf="@+id/btnMark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/proBarMoth"
         app:layout_constraintVertical_bias="0.0" />
@@ -198,10 +198,10 @@
         android:text="@string/text_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/proBarToday"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
+        app:layout_constraintVertical_bias="0.281" />
 
     <TextView
         android:id="@+id/textMothHP"
@@ -217,10 +217,10 @@
         android:text="@string/_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371" />
+        app:layout_constraintVertical_bias="0.385" />
 
 
 

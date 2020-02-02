@@ -3,20 +3,19 @@ package com.example.a26498;
 import android.app.AlertDialog;
 import android.content.Intent;
 //import android.content.SharedPreferences;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private FragmentMain fragmentMain = new FragmentMain();
     private FragmentShow fragmentShow = new FragmentShow();
     private FragmentUser fragmentUser = new FragmentUser();
-
-    private FrameLayout ly_content;
 
     private TextView textMain;
     private TextView textShow;
@@ -24,14 +23,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private UserClass userClass=new UserClass(30,900,1500);
     private int moneyOutDay=0,moneyOutMoth=0;
-    private boolean flage=true;
+    private boolean flag=true;
 
-
+    private SharedPreferences sharedPreDate;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreDate=getSharedPreferences("moneyData",MODE_PRIVATE);
+        editor=sharedPreDate.edit();
+//        editor.putInt("moneyDayHope",0);
+//        editor.putInt("moneyMothHope",0);
+//        editor.putInt("moneyHave",0);
+//        editor.putInt("moneyDayOut",0);
+//        editor.putInt("moneyMothOut",0);
+//        editor.apply();
+
         bindView();
         onClick(textMain);
         }
@@ -40,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(flage){//保证添加一次，到位展示
+        if(flag){//保证添加一次，到位展示
             transaction.add(R.id.fragmentContainer,fragmentMain);
             transaction.add(R.id.fragmentContainer,fragmentShow);
             transaction.add(R.id.fragmentContainer,fragmentUser);
-            flage=false;
+            flag=false;
         }
         hideFragment(transaction);
         switch(v.getId()){
@@ -52,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textMain.setSelected(true);
                     transaction.show(fragmentMain);
-                    System.out.println("123456");
+
                 break;
             case R.id.textShow:
                 setUnSelected();
@@ -99,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textMain=this.findViewById(R.id.textMain);
         textShow=this.findViewById(R.id.textShow);
         textUser=this.findViewById(R.id.textUser);
-        ly_content = this.findViewById(R.id.fragmentContainer);
 
         textMain.setOnClickListener(this);
         textShow.setOnClickListener(this);
@@ -126,32 +135,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int moneyOut=data.getIntExtra("moneyOut",0);
                 moneyOutDay+=moneyOut;
                 moneyOutMoth+=moneyOut;
-                String textPlayDay="今日已用￥"+moneyOutDay+",还可用￥"+(userClass.getMoneyTotalDay()-moneyOutDay);
-                String textPlayMoth="本月已用￥"+moneyOutMoth+",还可用￥"+(userClass.getMoneyTotalMoth()-moneyOutMoth);
-                fragmentMain.getTextShowDayMassage().setText(textPlayDay);
-                fragmentMain.getTextShowMothMassage().setText(textPlayMoth);
-                fragmentMain.getTextShowMoneyHave().setText(String.valueOf(userClass.getMoneyHave()-moneyOutMoth));
-                fragmentMain.setPro(moneyOutDay,moneyOutMoth,userClass.getMoneyTotalDay(),userClass.getMoneyTotalMoth());
-                 fragmentMain.getTextMothMoneyHope().setText(String.valueOf(userClass.getMoneyTotalMoth()));
-                 fragmentMain.getTextDayMoneyHope().setText(String.valueOf(userClass.getMoneyTotalDay()));
+                 editor.putInt("moneyDayOut",moneyOutDay);
+                 editor.putInt("moneyMothOut",moneyOutMoth);
+                 editor.apply();
+                 disPlay();
              }
               break;
 
            case 2:
                if(resultCode==RESULT_OK){
-                   int[] money=new int[3];
+                   int[] money;
                    money=data.getIntArrayExtra("money");
-                   userClass.setMoneyTotalDay(money[0]);
-                   userClass.setMoneyTotalMoth(money[1]);
-                   userClass.setMoneyHave(money[2]);
-                   for(int i=0;i<3;i++){
-                       System.out.println(money[i]);
-               }
-
+                   editor.putInt("moneyDayHope",money[0]);
+                   editor.putInt("moneyMothHope",money[1]);
+                   editor.putInt("moneyHave",money[2]);
+                   editor.apply();
+                   userClass.setMoneyTotalDay(sharedPreDate.getInt("moneyDayHope",0));
+                   userClass.setMoneyTotalMoth(sharedPreDate.getInt("moneyMothHope",0));
+                   userClass.setMoneyHave(sharedPreDate.getInt("moneyHave",0));
+                   disPlay();
            }
                break;
            default:
        }
+    }
+
+    public void disPlay(){
+        String textPlayDay="今日已用￥"+sharedPreDate.getInt("moneyDayOut",0)+",还可用￥"+(userClass.getMoneyTotalDay()-sharedPreDate.getInt("moneyDayOut",0));
+        String textPlayMoth="本月已用￥"+sharedPreDate.getInt("moneyMothOut",0)+",还可用￥"+(userClass.getMoneyTotalMoth()-sharedPreDate.getInt("moneyMothOut",0));
+        String textDay="￥"+textPlayDay;
+        String textMoth="￥"+textPlayMoth;
+        fragmentMain.getTextShowDayMassage().setText(textDay);
+        fragmentMain.getTextShowMothMassage().setText(textMoth);
+
+        String textMH="￥"+(userClass.getMoneyHave()-sharedPreDate.getInt("moneyMothOut",0));
+        fragmentMain.getTextShowMoneyHave().setText(textMH);
+        fragmentMain.setPro(moneyOutDay,moneyOutMoth,userClass.getMoneyTotalDay(),userClass.getMoneyTotalMoth());
+
+        String TM="￥"+(userClass.getMoneyTotalMoth());
+        String TD="￥"+(userClass.getMoneyTotalDay());
+        fragmentMain.getTextMothMoneyHope().setText(TM);
+        fragmentMain.getTextDayMoneyHope().setText(TD);
     }
 
 
