@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,12 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sharedPreDate=getSharedPreferences("moneyData",MODE_PRIVATE);
         editor=sharedPreDate.edit();
-//        editor.putInt("moneyDayHope",0);
-//        editor.putInt("moneyMothHope",0);
-//        editor.putInt("moneyHave",0);
-//        editor.putInt("moneyDayOut",0);
-//        editor.putInt("moneyMothOut",0);
-//        editor.apply();
 
         bindView();
         onClick(textMain);
@@ -55,14 +50,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.add(R.id.fragmentContainer,fragmentShow);
             transaction.add(R.id.fragmentContainer,fragmentUser);
             flag=false;
+            transaction.commit();
         }
         hideFragment(transaction);
         switch(v.getId()){
             case R.id.textMain:
                 setUnSelected();
                 textMain.setSelected(true);
-                    transaction.show(fragmentMain);
-
+                transaction.show(fragmentMain);
+                //disPlay();//这里有问题
                 break;
             case R.id.textShow:
                 setUnSelected();
@@ -96,7 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     });
                 break;
         }
-        transaction.commit();
+        Log.i("谁先","commit");
+   //     transaction.commit();
     }
 
     public void setUnSelected(){

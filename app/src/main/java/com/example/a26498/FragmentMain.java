@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,13 @@ public class FragmentMain extends Fragment {
             ViewGroup parent=(ViewGroup)view.getParent();
             if(null!=parent){
                 parent.removeView(view);
+                bindView(view);
             }
+            bindView(view);
         }
         else{
         view = inflater.inflate(R.layout.fragment_main,container,false);
+            Log.i("谁先","onCreateView");
         bindView(view);
         }
         return view;
@@ -44,7 +48,6 @@ public class FragmentMain extends Fragment {
         textShowMoneyHave=view.findViewById(R.id.textShowMoney);
         textDayMoneyHope=view.findViewById(R.id.textDayHP);
         textMothMoneyHope=view.findViewById(R.id.textMothHP);
-
         proBarDay = view.findViewById(R.id.proBarToday);
         proBarMoth = view.findViewById(R.id.proBarMoth);
     }

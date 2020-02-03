@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class FragmentUser extends Fragment {
         else{
             view = inflater.inflate(R.layout.fragment_user,container,false);
             bindView(view);
+            Log.i("谁先","User");
         }
         return view;
     }

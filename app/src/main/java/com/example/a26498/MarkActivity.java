@@ -17,7 +17,7 @@ public class MarkActivity extends AppCompatActivity {
     public void onClickBtnSave(View view){
         Intent intent = new Intent(MarkActivity.this,MainActivity.class);
         TextView textView=findViewById(R.id.editText);
-        int moneyOut=0;
+        int moneyOut;
         if("".equals(textView.getText().toString())){
             moneyOut=0;
         }
