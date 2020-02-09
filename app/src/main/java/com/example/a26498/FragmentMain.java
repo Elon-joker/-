@@ -1,10 +1,9 @@
 package com.example.a26498;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ public class FragmentMain extends Fragment {
     private TextView textShowDayMassage;
     private TextView textShowMothMassage;
     private TextView textShowMoneyHave;
-    static View view;
+    private View view;
     private ProgressBar proBarDay,proBarMoth;
 
 
@@ -29,20 +28,24 @@ public class FragmentMain extends Fragment {
             ViewGroup parent=(ViewGroup)view.getParent();
             if(null!=parent){
                 parent.removeView(view);
-                bindView(view);
             }
-            bindView(view);
         }
         else{
         view = inflater.inflate(R.layout.fragment_main,container,false);
-            Log.i("谁先","onCreateView");
         bindView(view);
         }
+
         return view;
     }
+@Override
+public void onStart(){
+        super.onStart();
+        MainActivity mainActivity=(MainActivity)getActivity();
+        disPlay(mainActivity.getMoneyOutDay(),mainActivity.getMoneyOutMoth(),mainActivity.getUserClass(),mainActivity.getSharedPreDate());
+}
 
     // 绑定控件,初始化
-    private void bindView(View view){
+    public void bindView(View view){
         textShowDayMassage=view.findViewById(R.id.textShowDayMassage);
         textShowMothMassage=view.findViewById(R.id.textShowMothMassage);
         textShowMoneyHave=view.findViewById(R.id.textShowMoney);
@@ -50,26 +53,10 @@ public class FragmentMain extends Fragment {
         textMothMoneyHope=view.findViewById(R.id.textMothHP);
         proBarDay = view.findViewById(R.id.proBarToday);
         proBarMoth = view.findViewById(R.id.proBarMoth);
+
     }
 
     /*get and set*/
-
-    public TextView getTextDayMoneyHope() {
-        return textDayMoneyHope;
-    }
-
-    public void setTextDayMoneyHope(TextView textDayMoneyHope) {
-        this.textDayMoneyHope = textDayMoneyHope;
-    }
-
-    public TextView getTextMothMoneyHope() {
-        return textMothMoneyHope;
-    }
-
-    public void setTextMothMoneyHope(TextView textMothMoneyHope) {
-        this.textMothMoneyHope = textMothMoneyHope;
-    }
-
     public TextView getTextShowDayMassage() {
         return textShowDayMassage;
     }
@@ -86,28 +73,12 @@ public class FragmentMain extends Fragment {
         this.textShowMothMassage = textShowMothMassage;
     }
 
-    public ProgressBar getProBarDay() {
-        return proBarDay;
-    }
-
-    public void setProBarDay(ProgressBar proBarDay) {
-        this.proBarDay = proBarDay;
-    }
-
     public ProgressBar getProBarMoth() {
         return proBarMoth;
     }
 
     public void setProBarMoth(ProgressBar proBarMoth) {
         this.proBarMoth = proBarMoth;
-    }
-
-    public TextView getTextShowMoneyHave() {
-        return textShowMoneyHave;
-    }
-
-    public void setTextShowMoneyHave(TextView textShowMoneyHave) {
-        this.textShowMoneyHave = textShowMoneyHave;
     }
 
     /*一般方法*/
@@ -117,6 +88,22 @@ public class FragmentMain extends Fragment {
             proBarMoth.setProgress(moneyOutMoth*100/allMothMoney);
         }
     }
+    public void disPlay(int moneyOutDay,int moneyOutMoth,UserClass userClass,SharedPreferences sharedPreDate){
+        String textPlayDay="今日已用￥"+sharedPreDate.getInt("moneyDayOut",0)+",还可用￥"+(userClass.getMoneyTotalDay()-sharedPreDate.getInt("moneyDayOut",0));
+        String textPlayMoth="本月已用￥"+sharedPreDate.getInt("moneyMothOut",0)+",还可用￥"+(userClass.getMoneyTotalMoth()-sharedPreDate.getInt("moneyMothOut",0));
+        String textDay="￥"+textPlayDay;
+        String textMoth="￥"+textPlayMoth;
+        textShowDayMassage.setText(textDay);
+        textShowMothMassage.setText(textMoth);
 
+        String textMH="￥"+(userClass.getMoneyHave()-sharedPreDate.getInt("moneyMothOut",0));
+        textShowMoneyHave.setText(textMH);
+        setPro(moneyOutDay,moneyOutMoth,userClass.getMoneyTotalDay(),userClass.getMoneyTotalMoth());
+
+        String TM="￥"+(userClass.getMoneyTotalMoth());
+        String TD="￥"+(userClass.getMoneyTotalDay());
+        textMothMoneyHope.setText(TM);
+        textDayMoneyHope.setText(TD);
+    }
 
 }

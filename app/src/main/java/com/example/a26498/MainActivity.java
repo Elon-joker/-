@@ -36,11 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sharedPreDate=getSharedPreferences("moneyData",MODE_PRIVATE);
         editor=sharedPreDate.edit();
-
         bindView();
+        }
+    @Override
+     public void onStart(){
+        super.onStart();
         onClick(textMain);
         }
-
     @Override
     public void onClick(View v) {
         FragmentManager fragmentManager=getSupportFragmentManager();
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.add(R.id.fragmentContainer,fragmentShow);
             transaction.add(R.id.fragmentContainer,fragmentUser);
             flag=false;
-            transaction.commit();
+
         }
         hideFragment(transaction);
         switch(v.getId()){
@@ -58,13 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textMain.setSelected(true);
                 transaction.show(fragmentMain);
-                //disPlay();//这里有问题
+
                 break;
             case R.id.textShow:
                 setUnSelected();
                 textShow.setSelected(true);
                     transaction.show(fragmentShow);
-
                 break;
             case R.id.textUser:
                 setUnSelected();
@@ -90,39 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
 
                     });
+
                 break;
         }
-        Log.i("谁先","commit");
-   //     transaction.commit();
-    }
-
-    public void setUnSelected(){
-        textMain.setSelected(false);
-        textShow.setSelected(false);
-        textUser.setSelected(false);
-    }
-
-    public void bindView(){
-        textMain=this.findViewById(R.id.textMain);
-        textShow=this.findViewById(R.id.textShow);
-        textUser=this.findViewById(R.id.textUser);
-
-        textMain.setOnClickListener(this);
-        textShow.setOnClickListener(this);
-        textUser.setOnClickListener(this);
-
-
-    }
-    public void hideFragment(FragmentTransaction transaction){
-            transaction.hide(fragmentMain);
-            transaction.hide(fragmentShow);
-            transaction.hide(fragmentUser);
-    }
-
-    public void onClickBtn(View view){
-        Intent intent = new Intent(MainActivity.this,MarkActivity.class);
-        startActivityForResult(intent,1);
-        //startActivity(intent);
+        transaction.commit();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -135,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  editor.putInt("moneyDayOut",moneyOutDay);
                  editor.putInt("moneyMothOut",moneyOutMoth);
                  editor.apply();
-                 disPlay();
+                 fragmentMain.disPlay(moneyOutDay,moneyOutMoth,userClass,sharedPreDate);
              }
               break;
 
@@ -150,30 +122,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    userClass.setMoneyTotalDay(sharedPreDate.getInt("moneyDayHope",0));
                    userClass.setMoneyTotalMoth(sharedPreDate.getInt("moneyMothHope",0));
                    userClass.setMoneyHave(sharedPreDate.getInt("moneyHave",0));
-                   disPlay();
+                   fragmentMain.disPlay(moneyOutDay,moneyOutMoth,userClass,sharedPreDate);
            }
                break;
            default:
        }
     }
+/*一般方法*/
+    public void onClickBtn(View view){
+        Intent intent = new Intent(MainActivity.this,MarkActivity.class);
+        startActivityForResult(intent,1);
+    }
+    public void hideFragment(FragmentTransaction transaction){
+        transaction.hide(fragmentMain);
+        transaction.hide(fragmentShow);
+        transaction.hide(fragmentUser);
+    }
+    public void setUnSelected(){
+        textMain.setSelected(false);
+        textShow.setSelected(false);
+        textUser.setSelected(false);
+    }
+    public void bindView(){
+        textMain=this.findViewById(R.id.textMain);
+        textShow=this.findViewById(R.id.textShow);
+        textUser=this.findViewById(R.id.textUser);
 
-    public void disPlay(){
-        String textPlayDay="今日已用￥"+sharedPreDate.getInt("moneyDayOut",0)+",还可用￥"+(userClass.getMoneyTotalDay()-sharedPreDate.getInt("moneyDayOut",0));
-        String textPlayMoth="本月已用￥"+sharedPreDate.getInt("moneyMothOut",0)+",还可用￥"+(userClass.getMoneyTotalMoth()-sharedPreDate.getInt("moneyMothOut",0));
-        String textDay="￥"+textPlayDay;
-        String textMoth="￥"+textPlayMoth;
-        fragmentMain.getTextShowDayMassage().setText(textDay);
-        fragmentMain.getTextShowMothMassage().setText(textMoth);
-
-        String textMH="￥"+(userClass.getMoneyHave()-sharedPreDate.getInt("moneyMothOut",0));
-        fragmentMain.getTextShowMoneyHave().setText(textMH);
-        fragmentMain.setPro(moneyOutDay,moneyOutMoth,userClass.getMoneyTotalDay(),userClass.getMoneyTotalMoth());
-
-        String TM="￥"+(userClass.getMoneyTotalMoth());
-        String TD="￥"+(userClass.getMoneyTotalDay());
-        fragmentMain.getTextMothMoneyHope().setText(TM);
-        fragmentMain.getTextDayMoneyHope().setText(TD);
+        textMain.setOnClickListener(this);
+        textShow.setOnClickListener(this);
+        textUser.setOnClickListener(this);
     }
 
+/*get and set*/
+
+    public UserClass getUserClass() {
+        return userClass;
+    }
+
+    public int getMoneyOutDay() {
+        return moneyOutDay;
+    }
+    public int getMoneyOutMoth() {
+        return moneyOutMoth;
+    }
+    public SharedPreferences getSharedPreDate() {
+        return sharedPreDate;
+    }
 
 }

@@ -27,7 +27,6 @@ public class FragmentUser extends Fragment {
         else{
             view = inflater.inflate(R.layout.fragment_user,container,false);
             bindView(view);
-            Log.i("谁先","User");
         }
         return view;
     }
