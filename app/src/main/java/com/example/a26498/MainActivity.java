@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sharedPreDate=getSharedPreferences("moneyData",MODE_PRIVATE);
         editor=sharedPreDate.edit();
+        //读出相关值进行展示
+        userClass.setMoneyTotalDay(sharedPreDate.getInt("moneyDayHope",0));
+        userClass.setMoneyTotalMoth(sharedPreDate.getInt("moneyMothHope",0));
+        userClass.setMoneyHave(sharedPreDate.getInt("moneyHave",0));
         bindView();
         }
     @Override
@@ -159,14 +163,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return userClass;
     }
 
-    public int getMoneyOutDay() {
-        return moneyOutDay;
-    }
-    public int getMoneyOutMoth() {
-        return moneyOutMoth;
-    }
     public SharedPreferences getSharedPreDate() {
         return sharedPreDate;
     }
+
 
 }

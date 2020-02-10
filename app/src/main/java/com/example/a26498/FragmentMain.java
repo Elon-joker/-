@@ -40,8 +40,9 @@ public class FragmentMain extends Fragment {
 @Override
 public void onStart(){
         super.onStart();
+        //得到绑定的activity并进行相关通信
         MainActivity mainActivity=(MainActivity)getActivity();
-        disPlay(mainActivity.getMoneyOutDay(),mainActivity.getMoneyOutMoth(),mainActivity.getUserClass(),mainActivity.getSharedPreDate());
+        disPlay(mainActivity.getSharedPreDate().getInt("moneyDayOut",0),mainActivity.getSharedPreDate().getInt("moneyMothOut",0),mainActivity.getUserClass(),mainActivity.getSharedPreDate());
 }
 
     // 绑定控件,初始化
