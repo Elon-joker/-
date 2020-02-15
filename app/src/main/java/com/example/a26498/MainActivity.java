@@ -2,7 +2,6 @@ package com.example.a26498;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-//import android.content.SharedPreferences;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences sharedPreDate;
     private SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         sharedPreDate=getSharedPreferences("moneyData",MODE_PRIVATE);
         editor=sharedPreDate.edit();
+        //存储时间，按时间更新数据
+        Calendar calendar=Calendar.getInstance();
+        editor.putInt("day",calendar.get(Calendar.DAY_OF_MONTH));
+        editor.putInt("month",calendar.get(Calendar.MONTH)+1);
+        if(calendar.get(Calendar.DAY_OF_MONTH)!=sharedPreDate.getInt("day",-1))
+            editor.putInt("moneyDayOut",0);
+        if((calendar.get(Calendar.MONTH)+1)!=sharedPreDate.getInt("month",-1))
+            editor.putInt("moneyMothOut",0);
+        editor.apply();
         //读出相关值进行展示
         userClass.setMoneyTotalDay(sharedPreDate.getInt("moneyDayHope",0));
         userClass.setMoneyTotalMoth(sharedPreDate.getInt("moneyMothHope",0));
@@ -108,10 +119,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int moneyOut=data.getIntExtra("moneyOut",0);
                 moneyOutDay+=moneyOut;
                 moneyOutMoth+=moneyOut;
+                editor.putInt("moneyHave",userClass.getMoneyHave()-moneyOut);
                  editor.putInt("moneyDayOut",moneyOutDay);
                  editor.putInt("moneyMothOut",moneyOutMoth);
                  editor.apply();
-                 fragmentMain.disPlay(moneyOutDay,moneyOutMoth,userClass,sharedPreDate);
+                 fragmentMain.disPlay(sharedPreDate.getInt("moneyDayOut",0),sharedPreDate.getInt("moneyMothOut",0),userClass,sharedPreDate);
              }
               break;
 
@@ -156,6 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textShow.setOnClickListener(this);
         textUser.setOnClickListener(this);
     }
+
+
 
 /*get and set*/
 

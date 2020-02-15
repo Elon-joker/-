@@ -15,4 +15,6 @@
     <string name="text_settingMoney">设置预算</string>
     <string name="text_moneyMoth">本月预算</string>
     <string name="text_MoneyDay">每日预算</string>
+    <string name="checkbox">CheckBox</string>
+    <string name="textBZ">备注</string>
 </resources>
