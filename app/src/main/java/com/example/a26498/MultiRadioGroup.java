@@ -2,6 +2,7 @@ package com.example.a26498;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,11 @@ public class MultiRadioGroup extends RadioGroup {
                             checkRadioButton(button);
                             if (mOnCheckedChangeListener != null) {
                                 mOnCheckedChangeListener.onCheckedChanged(MultiRadioGroup.this, button.getId());
+
                             }
                             return true;
                         }
+
                     });
                 }
             }
@@ -60,22 +63,16 @@ public class MultiRadioGroup extends RadioGroup {
             child = getChildAt(i);
             if (child instanceof RadioButton) {
                 RadioButton button = (RadioButton) child;
-                if (button == radioButton) {
-                    // do nothing
-                } else {
+                if (button != radioButton)
                     button.setChecked(false);
-                }
             } else if (child instanceof LinearLayout) {
                 int childCount = ((LinearLayout) child).getChildCount();
                 for (int j = 0; j < childCount; j++) {
                     View view = ((LinearLayout) child).getChildAt(j);
                     if (view instanceof RadioButton) {
                         RadioButton button = (RadioButton) view;
-                        if (button == radioButton) {
-                            // do nothing
-                        } else {
+                        if (button != radioButton)
                             button.setChecked(false);
-                        }
                     }
                 }
             }

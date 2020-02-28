@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ public class MarkActivity extends AppCompatActivity {
     private TextView textDate;
     private RadioGroup radioGroup;
 
+    private String text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,21 +28,22 @@ public class MarkActivity extends AppCompatActivity {
 
         String dataText= ""+(Calendar.getInstance().get(Calendar.MONTH)+1)+"月"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+"日";
         textDate=this.findViewById(R.id.date);
+        radioGroup=this.findViewById(R.id.multiRadioGroup);
         textDate.setText(dataText);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId){
+                RadioButton r=findViewById(checkedId);
+                text=String.valueOf(r.getText());
+            }
+        });
 
-        dataInitialize();//数据库的初始化
+       // dataInitialize();//数据库的初始化
     }
 
     public void onClickBtnSave(View view){
         //获取界面的支出信息
-        radioGroup=this.findViewById(R.id.multiRadioGroup);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId){
-
-                }
-
-        });
+        Log.i("45",text);
 
         Intent intent = new Intent(MarkActivity.this,MainActivity.class);
         TextView textView=findViewById(R.id.editText);
@@ -63,55 +68,55 @@ public class MarkActivity extends AppCompatActivity {
         //开始添加数据库的架构
         values.put("class","水电煤气");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第二条
         values.put("class","学习用品");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第四条
         values.put("class","中晚餐");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第五条
         values.put("class","礼物");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第六条
         values.put("class","公交卡");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第七条
         values.put("class","网购");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第八条
         values.put("class","水果零食");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第九条
         values.put("class","早餐");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
         //第十条
         values.put("class","其他");
         values.put("payment",0);
-        values.put("remark","");
+        values.put("date","");
         database.replace("AccountBook",null,values);//插入第一类消费
         values.clear();//清除存记录，开始下一条记录
     }
