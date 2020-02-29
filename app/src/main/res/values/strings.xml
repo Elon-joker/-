@@ -17,4 +17,13 @@
     <string name="text_MoneyDay">每日预算</string>
     <string name="checkbox">CheckBox</string>
     <string name="textBZ">备注</string>
+    <string name="text_水电煤气">水电煤气</string>
+    <string name="text_学习用品">学习用品</string>
+    <string name="text_中晚餐">中晚餐</string>
+    <string name="text_礼物">礼物</string>
+    <string name="text_公交卡">公交卡</string>
+    <string name="text_网购">网购</string>
+    <string name="text_水果零食">水果零食</string>
+    <string name="text_早餐">早餐</string>
+    <string name="text_其他">其他</string>
 </resources>

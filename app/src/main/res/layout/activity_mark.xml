@@ -68,7 +68,7 @@
     <com.example.a26498.MultiRadioGroup
         android:id="@+id/multiRadioGroup"
         android:layout_width="372dp"
-        android:layout_height="68dp"
+        android:layout_height="95dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -78,9 +78,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286">
+        app:layout_constraintVertical_bias="0.312">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,7 +107,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_水电煤气"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -123,7 +124,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_学习用品"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -140,7 +141,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_中晚餐"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -157,12 +158,12 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_礼物"
                 android:textColor="@color/text_check_color" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -187,7 +188,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_公交卡"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -204,7 +205,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_网购"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -221,7 +222,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_水果零食"
                 android:textColor="@color/text_check_color" />
 
             <Space
@@ -237,8 +238,36 @@
                 android:background="@drawable/text_check_on"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/text_0"
+                android:text="@string/text_早餐"
                 android:textColor="@color/text_check_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
+
+            <RadioButton
+                android:id="@+id/radioButton9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/text_check_on"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/text_其他"
+                android:textColor="@color/text_check_color" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3" />
 
         </LinearLayout>
 
@@ -284,37 +313,5 @@
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/multiRadioGroup"
         app:layout_constraintVertical_bias="0.0" />
-
-    <RadioGroup
-        android:id="@+id/ttt"
-        android:layout_width="301dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892">
-
-        <RadioButton
-            android:id="@+id/radioButton9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radioButton10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RadioButton" />
-    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>
