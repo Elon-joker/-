@@ -23,17 +23,8 @@ public class FragmentMain extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(null!=view)
-        {
-            ViewGroup parent=(ViewGroup)view.getParent();
-            if(null!=parent){
-                parent.removeView(view);
-            }
-        }
-        else{
         view = inflater.inflate(R.layout.fragment_main,container,false);
         bindView(view);
-        }
 
         return view;
     }
@@ -84,10 +75,15 @@ public void onStart(){
 
     /*一般方法*/
     public void setPro(int moneyOutDay,int moneyOutMoth,int allDayMoney,int allMothMoney){
-        if(allDayMoney!=0&&allMothMoney!=0){
+        if(allDayMoney!=0)
             proBarDay.setProgress(moneyOutDay*100/allDayMoney);
+        else
+            proBarDay.setProgress(100);
+        if(allMothMoney!=0)
             proBarMoth.setProgress(moneyOutMoth*100/allMothMoney);
-        }
+        else
+            proBarMoth.setProgress(100);
+
     }
     public void disPlay(int moneyOutDay,int moneyOutMoth,UserClass userClass,SharedPreferences sharedPreDate){
         String textPlayDay="今日已用￥"+sharedPreDate.getInt("moneyDayOut",0)+",还可用￥"+(userClass.getMoneyTotalDay()-sharedPreDate.getInt("moneyDayOut",0));

@@ -105,7 +105,7 @@
                 android:layout_weight="3"
                 android:background="@drawable/text_check_on"
                 android:button="@null"
-                android:checked="false"
+                android:checked="true"
                 android:gravity="center"
                 android:text="@string/text_水电煤气"
                 android:textColor="@color/text_check_color" />

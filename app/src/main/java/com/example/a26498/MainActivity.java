@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setUnSelected();
                 textMain.setSelected(true);
                 transaction.show(fragmentMain);
-
                 break;
             case R.id.textShow:
                 setUnSelected();
