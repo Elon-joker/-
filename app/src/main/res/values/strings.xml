@@ -26,4 +26,6 @@
     <string name="text_水果零食">水果零食</string>
     <string name="text_早餐">早餐</string>
     <string name="text_其他">其他</string>
+    <string name="text_分类标签">分类标签</string>
+    <string name="text_time">时间</string>
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time" />
+
+        <TextView
+            android:id="@+id/className"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_分类标签"
+            android:textColor="#ff9900" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="56dp"
+        android:layout_height="39dp"
+        android:layout_weight="4"
+        android:text="@string/tex_payment"
+        android:textColor="#ff9900" />
+    <TextView
+        android:id="@+id/BZ"
+        android:layout_width="124dp"
+        android:layout_height="39dp"
+        android:text="@string/textBZ"
+        android:textColor="#ff9900"
+        android:layout_weight="8"/>
+
+</LinearLayout>
